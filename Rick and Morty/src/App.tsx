@@ -1,32 +1,28 @@
 import "./App.css";
 import { Routes, Route, NavLink } from "react-router-dom";
-
-const activeStyle = {
-  textDecoration: "underline",
-};
-
-
-
+import Home from "./page/Home/Home";
+import About from "./page/About/About";
+import Characters from "./page/Characters/Characters";
+import Character from "./page/Character/Character";
 
 function App() {
+
   return (
-    <div>
-      <nav>
-        <NavLink
-          to="/"
-          style={(data) => (isActive ? activeStyle : undefined)}
-        >
-          Home
-        </NavLink>{" "}
-        &nbsp;
-        <NavLink to="/about">About</NavLink> &nbsp;
-        <NavLink to="/characters">Characters</NavLink>
+    <div className="app-container">
+      <nav className="nav">
+        <NavLink to="/" className="nav-item">Home</NavLink>{" "} &nbsp;
+        <NavLink to="/about" className="nav-item">About</NavLink> &nbsp;
+        <NavLink to="/characters" className="nav-item">Characters</NavLink>
       </nav>
 
       <Routes>
-        <Route path="/" element={<h1>Home page</h1>} />
-        <Route path="/about" element={<h1>About</h1>} />
-        <Route path="/characters" element={<h1>Characters</h1>} />
+        <Route path="/"  index element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/characters" element={<Characters />} />
+        <Route path="/character/:id" element={<Character />} />
+        
+        <Route path="*" element={<h1>404 not found</h1>} />
+      
       </Routes>
     </div>
   );

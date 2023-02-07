@@ -1,0 +1,39 @@
+.nav-item {
+  text-decoration: none;
+  font-weight: normal;
+  font-size: 25px;
+  color: rgb(233, 16, 16);
+}
+
+.nav-item:active {
+  text-decoration: underline;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    justify-content: center;
+    text-align: center;
+}
+
+.nav {
+    display: flex;
+    gap: 25px;
+    width: 100%;
+    justify-content: center;
+    padding: 25px 0;
+}
+
+.characters {
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    gap: 10px;
+}
+
+.container__image {
+width: 100%;
+}
