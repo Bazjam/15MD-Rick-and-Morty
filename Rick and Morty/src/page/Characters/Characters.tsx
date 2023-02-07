@@ -1,13 +1,10 @@
 import { useQuery } from "react-query";
 import axios from "axios";
 import { Link, useSearchParams } from "react-router-dom";
-import { useEffect, useState } from "react";
 
-const getAllCharacters = async () => {
-  const { data } = await axios.get("https://rickandmortyapi.com/api/character");
 
-  return data;
-};
+
+
 
 
 
@@ -46,13 +43,22 @@ type AllCharactersResponse = {
     results: Character[]
 }
 
+
+const getAllCharacters = async (keys: readonly unknown[] | [string]) => {
+    
+    // @ts-ignore
+    const { data } = await axios.get(`https://rickandmortyapi.com/api/character?page=${keys[1]}`);
+  
+    return data;
+  };
+
+
 const Characters = () => {
-    let [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams({page: "1"});
 
-  const [nextPageLink, setNextPageLink] = useState("");
-  const { data, isLoading } = useQuery<AllCharactersResponse>("allCharacters", getAllCharacters);
 
-    console.log('nextPageLink', nextPageLink)
+  const { data, isLoading } = useQuery<AllCharactersResponse>(["allCharacters", searchParams.get('page')], ({queryKey}) => getAllCharacters(queryKey));
+
 
   if (isLoading) {
       return <h1>Loading ...</h1>;
@@ -71,7 +77,8 @@ const Characters = () => {
       <br />
       <button onClick={() => {
         const pageParam = info.next?.split("?")[1] || ""
-        setSearchParams(pageParam)
+
+        setSearchParams(pageParam)  // Page 2
       }}>
         Next
         </button>
