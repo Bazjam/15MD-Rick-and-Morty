@@ -73,8 +73,7 @@ const Characters = () => {
      return (
         <div className="allImageWrapper">
       
-      <br />
-      <br />
+      
       <button className="glow-on-hover" 
       onClick={() => {
         const pageParam = info.next?.split("?")[1] || ""
