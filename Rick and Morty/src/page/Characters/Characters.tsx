@@ -71,11 +71,12 @@ const Characters = () => {
     const {info, results: characters}  = data
 
      return (
-        <div>
-      <h1>This is Characters</h1>
+        <div className="allImageWrapper">
+      
       <br />
       <br />
-      <button onClick={() => {
+      <button className="glow-on-hover" 
+      onClick={() => {
         const pageParam = info.next?.split("?")[1] || ""
 
         setSearchParams(pageParam)  // Page 2

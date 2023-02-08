@@ -4,30 +4,33 @@ import axios from "axios";
 import { Character as CharacterType } from "../Characters/Characters";
 import { redirect } from "react-router-dom";
 
-const getAllCharacters = async (id:string) => {
-    const { data } = await axios.get(`https://rickandmortyapi.com/api/character/${id}`);
-  
-    return data
-  };
-  
+const getAllCharacters = async (id: string) => {
+  const { data } = await axios.get(
+    `https://rickandmortyapi.com/api/character/${id}`
+  );
+
+  return data;
+};
 
 const Character = () => {
-    const { id } = useParams <{id: string}>()   //!!!!!!!!!!
-    const navigate = useNavigate();
-    
-    const { data, isLoading } = useQuery<CharacterType>(["oneCharacters", id],() => getAllCharacters(id!)); // !!!!!!
+  const { id } = useParams<{ id: string }>(); //!!!!!!!!!!
+  const navigate = useNavigate();
 
+  const { data, isLoading } = useQuery<CharacterType>(
+    ["oneCharacters", id],
+    () => getAllCharacters(id!)
+  ); // !!!!!!
 
-    if (isLoading){
-        return <h1>Loading ...</h1>;
-    }
-    
-    if (!data){    
-        navigate('/')
-        return null;
-    }
+  if (isLoading) {
+    return <h1>Loading ...</h1>;
+  }
 
-    const {name, image} = data
+  if (!data) {
+    navigate("/");
+    return null;
+  }
+
+  const { name, image } = data;
 
   return (
     <div>

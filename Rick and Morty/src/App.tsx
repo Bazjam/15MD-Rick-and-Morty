@@ -21,7 +21,7 @@ function App() {
         <Route path="/characters" element={<Characters />} />
         <Route path="/character/:id" element={<Character />} />
         
-        <Route path="*" element={<h1>404 not found</h1>} />
+        <Route path="*" element={ <h1>404 not found</h1>} />
       
       </Routes>
     </div>
