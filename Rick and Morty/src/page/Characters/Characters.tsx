@@ -1,21 +1,16 @@
 import { useQuery } from "react-query";
 import axios from "axios";
 import { Link, useSearchParams } from "react-router-dom";
-
-
-
-
-
-
+import { useState } from "react";
 
 interface Location {
-    name: string
-    url: string
+  name: string;
+  url: string;
 }
 
 interface Origin {
-    name: string
-    url: string
+  name: string;
+  url: string;
 }
 
 export type Character = {
@@ -26,7 +21,7 @@ export type Character = {
   image: string;
   location: Location;
   name: string;
-  origin: Origin
+  origin: Origin;
   species: string;
   status: "Alive" | "Dead" | "unknown";
   type: string;
@@ -34,62 +29,78 @@ export type Character = {
 };
 
 type AllCharactersResponse = {
-    info: {
-    count: number,
-    pages: number,
-    next: string | null,
-    prev: string | null,
-    },
-    results: Character[]
-}
-
+  info: {
+    count: number;
+    pages: number;
+    next: string | null;
+    prev: string | null;
+  };
+  results: Character[];
+};
 
 const getAllCharacters = async (keys: readonly unknown[] | [string]) => {
-    
-    // @ts-ignore
-    const { data } = await axios.get(`https://rickandmortyapi.com/api/character?page=${keys[1]}`);
-  
-    return data;
-  };
+  // @ts-ignore
+  const { data } = await axios.get(
+    `https://rickandmortyapi.com/api/character?page=${keys[1]}`
+  );
 
+  return data;
+};
 
 const Characters = () => {
-    const [searchParams, setSearchParams] = useSearchParams({page: "1"});
+  const [searchParams, setSearchParams] = useSearchParams({ page: "1" });
 
-
-  const { data, isLoading } = useQuery<AllCharactersResponse>(["allCharacters", searchParams.get('page')], ({queryKey}) => getAllCharacters(queryKey));
-
+  const { data, isLoading } = useQuery<AllCharactersResponse>(
+    ["allCharacters", searchParams.get("page")],
+    ({ queryKey }) => getAllCharacters(queryKey)
+  );
 
   if (isLoading) {
-      return <h1>Loading ...</h1>;
-    }
-    
-    if (!data) {
-        throw Error("Something went wrong");
-    }
-    
-    const {info, results: characters}  = data
+    return <h1>Loading ...</h1>;
+  }
 
-     return (
-        <div className="allImageWrapper">
-      
-      
-      <button className="glow-on-hover" 
-      onClick={() => {
-        const pageParam = info.next?.split("?")[1] || ""
+  if (!data) {
+    throw Error("Something went wrong");
+  }
 
-        setSearchParams(pageParam)  // Page 2
-      }}>
+  const { info, results: characters } = data;
+
+  // const [deadOrLive, setDeadOrLive] = useState("")
+
+  // const insertClass = (stat) => {
+  //   characters.map(({ status }) => {
+  //     if (status ==="Alive") {
+  //       return setDeadOrLive("green")
+  //     } else if (status === "Dead"){
+  //       return setDeadOrLive("red")
+  //     } else if (status === "unknown"){
+  //       return setDeadOrLive("orange")
+  //     }
+  //   })
+  // }
+
+  return (
+    <div className="allImageWrapper">
+      <button
+        className="glow-on-hover"
+        onClick={() => {
+          const pageParam = info.next?.split("?")[1] || "";
+
+          setSearchParams(pageParam); // Page 2
+        }}
+      >
         Next
-        </button>
+      </button>
+
       <div className="characters">
-        {characters.map(({ id, image, name }) => (
-            <Link to={`/character/${id}`} key={id}>
-          <div>
-            <img src={image} className="container__image" alt="" />
-            <h4 className="name"> {name} </h4>
-          </div>
-            </Link>
+        {characters.map(({ id, image, name, status }) => (
+          
+          <Link to={`/character/${id}`} key={id}>
+            <div>
+              <img className={"myClass " + (status === 'Alive' ? 'green' : (status === 'Dead' ? 'red' : 'orange'))} src={image} alt="" />
+              <h4 className="name"> {name} </h4>
+            </div>
+          </Link>
         ))}
       </div>
     </div>

@@ -2,7 +2,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { Character as CharacterType } from "../Characters/Characters";
-import { redirect } from "react-router-dom";
 
 const getAllCharacters = async (id: string) => {
   const { data } = await axios.get(
@@ -23,7 +22,7 @@ const Character = () => {
 
   if (isLoading) {
     return <h1>Loading ...</h1>;
-  }
+  } 
 
   if (!data) {
     navigate("/");
