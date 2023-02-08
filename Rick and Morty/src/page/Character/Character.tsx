@@ -33,8 +33,8 @@ const Character = () => {
   const { name, image } = data;
 
   return (
-    <div>
-      <img src={image} alt="" width={300} />
+    <div className="character">
+      <img className="oneImg" src={image} alt="" width={300} />
       <h1>{name}</h1>
     </div>
   );

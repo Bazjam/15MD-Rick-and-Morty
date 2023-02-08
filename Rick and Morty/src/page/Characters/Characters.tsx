@@ -88,7 +88,7 @@ const Characters = () => {
             <Link to={`/character/${id}`} key={id}>
           <div>
             <img src={image} className="container__image" alt="" />
-            <h4>{name}</h4>
+            <h4 className="name"> {name} </h4>
           </div>
             </Link>
         ))}
