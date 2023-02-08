@@ -39,15 +39,19 @@
 .character {
   padding-top: 100px;
   border-radius: 5px;
+  color: aliceblue;
+  margin: 0 auto;
+}
+
+.character__wrapper {
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  padding-left: 5px;
 }
 
 .allImageWrapper {
   padding: 0 0 50px 10px;
-}
-
-.container__image {
-  width: 100%;
-  border-radius: 5px;
 }
 
 .oneImg {
@@ -58,6 +62,10 @@
   font-size: 1.1rem;
   font-weight: 400;
   color: whitesmoke;
+}
+.container__image {
+  width: 100%;
+  border-radius: 5px;
 }
 
 .green {
@@ -76,7 +84,32 @@
   border-radius: 5px;
 }
 
+.character__h1 {
+  font-family: "Orbitron", sans-serif;
+  text-align: start;
+  padding: 5px;
+}
 
+.circle-green {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #48ff00;
+}
+
+.circle-red {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ff0000;
+}
+
+.circle-orange {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ff5e00;
+}
 
 /* ---------------------------BTB--------------------------- */
 .glow-on-hover {

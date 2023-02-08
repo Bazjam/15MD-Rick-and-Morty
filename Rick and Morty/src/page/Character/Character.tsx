@@ -22,19 +22,39 @@ const Character = () => {
 
   if (isLoading) {
     return <h1>Loading ...</h1>;
-  } 
+  }
 
   if (!data) {
     navigate("/");
     return null;
   }
 
-  const { name, image } = data;
+  const { name, image, gender, species, status } = data;
 
   return (
     <div className="character">
       <img className="oneImg" src={image} alt="" width={300} />
-      <h1>{name}</h1>
+      
+        <div>
+          <h1 className="character__h1">Name: {name}</h1>
+          <h1 className="character__h1">Gender: {gender}</h1>
+          <h1 className="character__h1">Species: {species}</h1>
+        </div>
+        <div className="character__wrapper">
+        <div
+          className={
+            "myClass " +
+            (status === "Alive"
+              ? "circle-green"
+              : status === "Dead"
+              ? "circle-red"
+              : "circle-orange")
+          }
+        ></div>
+        <div>
+          <h1 className="character__h1 ">Statues: {status}</h1>
+        </div>
+      </div>
     </div>
   );
 };

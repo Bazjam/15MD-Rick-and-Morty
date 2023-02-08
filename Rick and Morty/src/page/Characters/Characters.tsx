@@ -1,7 +1,6 @@
 import { useQuery } from "react-query";
 import axios from "axios";
 import { Link, useSearchParams } from "react-router-dom";
-import { useState } from "react";
 
 interface Location {
   name: string;
@@ -64,20 +63,6 @@ const Characters = () => {
   }
 
   const { info, results: characters } = data;
-
-  // const [deadOrLive, setDeadOrLive] = useState("")
-
-  // const insertClass = (stat) => {
-  //   characters.map(({ status }) => {
-  //     if (status ==="Alive") {
-  //       return setDeadOrLive("green")
-  //     } else if (status === "Dead"){
-  //       return setDeadOrLive("red")
-  //     } else if (status === "unknown"){
-  //       return setDeadOrLive("orange")
-  //     }
-  //   })
-  // }
 
   return (
     <div className="allImageWrapper">
